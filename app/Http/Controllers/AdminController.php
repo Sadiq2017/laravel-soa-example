@@ -18,10 +18,13 @@ class AdminController extends Controller
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function activity(): array
+    public function activity(Request $request)
     {
-        $data=$this->client->send('getPageTracker');
-        return $data['result'];
+        $page=$request->get('page')??1;
+        $perPage=$request->get('per-page')??1;
+        $response=$this->client->send('getPageTracker',['page'=>$page,'per-page'=>$perPage]);
+        $data=$response['result']['original']['data'];
+        return view('admin.activity',compact('data'));
     }
 
 }
