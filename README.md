@@ -3,6 +3,11 @@ Installation
 
 ### Requirements
 
+First, you need to install and configure this project
+```console
+$ https://github.com/Sadiq2017/laravel-soa-activity
+```
+
 Open a command console, enter your project directory and execute:
 
 ```console
