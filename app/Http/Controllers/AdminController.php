@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Services\JsonRpcClient;
@@ -20,11 +22,15 @@ class AdminController extends Controller
      */
     public function activity(Request $request)
     {
-        $page=$request->get('page')??1;
-        $perPage=$request->get('per-page')??1;
-        $response=$this->client->send('getPageTracker',['page'=>$page,'per-page'=>$perPage]);
-        $data=$response['result']['original']['data'];
-        return view('admin.activity',compact('data'));
+        $page = $request->get('page') ?? 1;
+
+        $response = $this->client->send('getPageTracker', ['page' => $page]);
+
+        $data = $response['result']['original']['data'];
+
+        $pageCount = $response['result']['original']['pageCount'];
+
+        return view('admin.activity', compact('data', 'pageCount', 'page'));
     }
 
 }

@@ -23,4 +23,5 @@ Route::get('/page2',[\App\Http\Controllers\SiteController::class,'page2']);
 Route::get('/page3',[\App\Http\Controllers\SiteController::class,'page3']);
 Route::get('/page4',[\App\Http\Controllers\SiteController::class,'page4']);
 Route::get('/page5',[\App\Http\Controllers\SiteController::class,'page5']);
-Route::get('/admin/activity',[\App\Http\Controllers\AdminController::class,'activity']);
+Route::get('/admin/activity',[\App\Http\Controllers\AdminController::class,'activity'])
+    ->name('admin.activity');

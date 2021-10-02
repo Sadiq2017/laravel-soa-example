@@ -23,14 +23,24 @@
         </thead>
         <tbody>
         @foreach($data as $item)
-        <tr>
-            <td>{{$item['url']}}</td>
-            <td>{{$item['visit_count']}}</td>
-            <td>{{$item['max_date']}}</td>
-        </tr>
+            <tr>
+                <td>{{$item['url']}}</td>
+                <td>{{$item['visit_count']}}</td>
+                <td>{{$item['last_date']}}</td>
+            </tr>
         @endforeach
         </tbody>
     </table>
+    <ul class="pagination">
+        @for($i = 1; $i <= $pageCount; $i++)
+            @if($i==$page)
+                <?php $className='active'?>
+            @else
+                <?php $className=''?>
+            @endif
+            <li class="{{$className}}"><a href="{{route('admin.activity')}}?page={{$i}}">{{$i}}</a></li>
+        @endfor
+    </ul>
 
 </div>
 

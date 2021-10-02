@@ -1,17 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Services\JsonRpcClient;
 use Carbon\CarbonImmutable;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 
 class PageTracker
 {
-
 
     protected $client;
 
@@ -30,7 +30,13 @@ class PageTracker
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->client->send('setPageTracker', ['url' => $request->url()]);
+        $this->client->send('setPageTracker',
+            [
+                'url' => $request->url(),
+                'visit_date' => CarbonImmutable::now()->format('Y-m-d H:i:s')
+            ]
+        );
+
         return $next($request);
     }
 }
